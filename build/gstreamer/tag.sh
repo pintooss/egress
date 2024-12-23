@@ -9,7 +9,7 @@ do
     digests=()
     for arch in ${archs[*]}
     do
-        digest=`docker manifest inspect livekit/gstreamer:$gst_version-$suffix-$arch | jq ".manifests[] | select(.platform.architecture == \"$arch\").digest"`
+        digest=`docker manifest inspect pintoinc/gstreamer:$gst_version-$suffix-$arch | jq ".manifests[] | select(.platform.architecture == \"$arch\").digest"`
         # remove quotes
         digest=${digest:1:$[${#digest}-2]}
         digests+=($digest)
@@ -18,9 +18,9 @@ do
     manifests=""
     for digest in ${digests[*]}
     do
-        manifests+=" livekit/gstreamer@$digest"
+        manifests+=" pintoinc/gstreamer@$digest"
     done
 
-    docker manifest create livekit/gstreamer:$gst_version-$suffix$manifests
-    docker manifest push livekit/gstreamer:$gst_version-$suffix
+    docker manifest create pintoinc/gstreamer:$gst_version-$suffix$manifests
+    docker manifest push pintoinc/gstreamer:$gst_version-$suffix
 done

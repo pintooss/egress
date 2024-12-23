@@ -29,7 +29,7 @@ on:
 
 jobs:
   build:
-    runs-on: buildjet-8vcpu-ubuntu-2204
+    runs-on: ubuntu-latest
     outputs:
       image: ${{ steps.docker-md.outputs.tags }}
     steps:
@@ -84,7 +84,7 @@ jobs:
       fail-fast: false
       matrix:
         integration_type: [file, stream, segments, images, multi, edge]
-    runs-on: buildjet-8vcpu-ubuntu-2204
+    runs-on: ubuntu-latest
     steps:
       - uses: shogo82148/actions-setup-redis@v1
         with:
